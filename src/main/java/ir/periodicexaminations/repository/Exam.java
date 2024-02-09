@@ -5,13 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.naming.Name;
 import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Examination {
+@Table(name = "Exams")
+public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long exId;
@@ -20,5 +22,8 @@ public class Examination {
     private int cbc;
     private int wbc;
     private int hemoglobin;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Employee employee;
 
 }

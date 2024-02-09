@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(name = "Users")
 public class User {
 
     @Id
@@ -16,4 +17,8 @@ public class User {
     private Long uId;
     private String userName;
     private String password;
+
+
+    @ManyToOne
+    private Employee employee;
 }
