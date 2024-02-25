@@ -1,6 +1,6 @@
-package ir.periodicexaminations.impRepos;
+package ir.periodicexaminations.model.impRepos;
 
-import ir.periodicexaminations.repository.Employee;
+import ir.periodicexaminations.model.repository.Employee;
 import org.springframework.data.repository.CrudRepository;
 
 public interface EmployeeRepository extends CrudRepository<Employee,Long> {

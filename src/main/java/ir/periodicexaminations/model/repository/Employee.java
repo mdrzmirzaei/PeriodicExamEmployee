@@ -1,4 +1,4 @@
-package ir.periodicexaminations.repository;
+package ir.periodicexaminations.model.repository;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -15,17 +15,17 @@ import java.util.Set;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long emp_id;
+    private Long empId;
     private String empName;
     private String empFamily;
     private String nationalCode;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "emp_id")
-    private Set<Exam> exams= new HashSet<>();
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_Id", referencedColumnName = "userId")
+    private User user;
 
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "emp_id")
-    private Set<User> users= new HashSet<>();
+    private Set<Exam> exams = new HashSet<>();
+
 }

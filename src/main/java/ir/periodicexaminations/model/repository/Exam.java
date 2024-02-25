@@ -1,29 +1,28 @@
-package ir.periodicexaminations.repository;
+package ir.periodicexaminations.model.repository;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.naming.Name;
 import java.sql.Timestamp;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "Exams")
+@Table(name = "exams")
 public class Exam {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long exId;
+    private Long examId;
 
     private Timestamp dateExamination;
     private int cbc;
     private int wbc;
     private int hemoglobin;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Employee employee;
 
 }

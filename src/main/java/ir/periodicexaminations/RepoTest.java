@@ -1,13 +1,12 @@
 package ir.periodicexaminations;
 
-import ir.periodicexaminations.impRepos.EmployeeRepository;
-import ir.periodicexaminations.impRepos.ExamRepository;
-import ir.periodicexaminations.impRepos.UserRepository;
-import ir.periodicexaminations.repository.Employee;
-import ir.periodicexaminations.repository.User;
+import ir.periodicexaminations.model.impRepos.EmployeeRepository;
+import ir.periodicexaminations.model.impRepos.ExamRepository;
+import ir.periodicexaminations.model.impRepos.UserRepository;
+import ir.periodicexaminations.model.repository.Employee;
+import ir.periodicexaminations.model.repository.User;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 @Component
 public class RepoTest implements CommandLineRunner {
@@ -35,11 +34,11 @@ public class RepoTest implements CommandLineRunner {
         System.out.println(e1.toString());
 
 
-        User u1 = new User();
-        u1.setUserName("nationalcode");
-        u1.setPassword("123456");
-        u1.setEmployee(e1);
-        userRepository.save(u1);
+//        User u1 = new User();
+//        u1.setUserName("nationalcode");
+//        u1.setPassword("123456");
+//        u1.setEmployee(e1);
+//        userRepository.save(u1);
 
 
     }

@@ -1,4 +1,4 @@
-package ir.periodicexaminations.repository;
+package ir.periodicexaminations.model.repository;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -9,16 +9,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long uId;
+    private Long userId;
     private String userName;
     private String password;
 
-
-    @ManyToOne
+    @OneToOne(mappedBy = "user")
     private Employee employee;
+
 }
