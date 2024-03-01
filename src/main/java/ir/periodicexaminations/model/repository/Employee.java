@@ -22,6 +22,13 @@ public class Employee {
     private String empFamily;
     private String nationalCode;
 
+
+    public Employee(String empName, String empFamily, String nationalCode) {
+        this.empName = empName;
+        this.empFamily = empFamily;
+        this.nationalCode = nationalCode;
+    }
+
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;

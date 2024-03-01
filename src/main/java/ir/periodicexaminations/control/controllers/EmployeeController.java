@@ -2,30 +2,36 @@ package ir.periodicexaminations.control.controllers;
 
 
 import ir.periodicexaminations.control.services.EmployeeService;
+import ir.periodicexaminations.model.EmployeeDao;
 import ir.periodicexaminations.model.impRepos.EmployeeRepository;
 import ir.periodicexaminations.model.repository.Employee;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import javax.swing.text.html.Option;
+import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.*;
 
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/employees")
-public class EmployeeController {
+public class EmployeeController implements Serializable {
 
 
-    private final EmployeeRepository employeeRepository;
-    public List<Employee> employeeList;
+    @Autowired
+    EmployeeService employeeService;
 
 
     @PostMapping(value = "/list")
-    List<Employee> getEmployeeList() {
-        EmployeeService es = new EmployeeService(employeeRepository);
-        employeeList=es.showEmployees();
-        return employeeList;
+    List<EmployeeDao> getEmployeeList() {
+
+        return employeeService.showEmployees();
+
+
     }
 }
