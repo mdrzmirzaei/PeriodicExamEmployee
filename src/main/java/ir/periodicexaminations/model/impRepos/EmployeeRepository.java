@@ -1,20 +1,31 @@
 package ir.periodicexaminations.model.impRepos;
 
+import ir.periodicexaminations.model.EmployeeDao;
 import ir.periodicexaminations.model.repository.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
+import org.springframework.lang.NonNullApi;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @Repository
-public interface EmployeeRepository extends CrudRepository<Employee,Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Long>, PagingAndSortingRepository<Employee, Long> {
 
-@Query(value = "select * from employees",nativeQuery = true)
-List<Employee> list();
+
+    @Query(value = "select * from employees", nativeQuery = true)
+    List<Employee> list();
 
     @Override
     List<Employee> findAll();
+
+    @Override
+    Page<Employee> findAll(Pageable pageable);
+
 }
+
