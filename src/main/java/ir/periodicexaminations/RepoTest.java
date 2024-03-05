@@ -2,38 +2,48 @@ package ir.periodicexaminations;
 
 
 import ir.periodicexaminations.model.implementRepositories.EmployeeRepository;
-import ir.periodicexaminations.model.implementRepositories.ExamRepository;
+import ir.periodicexaminations.model.implementRepositories.examRepositories.BloodExamRepository;
+import ir.periodicexaminations.model.implementRepositories.examRepositories.ExamFileRepository;
 import ir.periodicexaminations.model.implementRepositories.UserRepository;
-import ir.periodicexaminations.model.repository.entities.Exam;
+import ir.periodicexaminations.model.implementRepositories.examRepositories.HearingExamRepository;
+import ir.periodicexaminations.model.implementRepositories.examRepositories.VisionExamRepository;
 import ir.periodicexaminations.model.repository.entities.Employee;
+import ir.periodicexaminations.model.repository.entities.Exam.BloodExam;
+import ir.periodicexaminations.model.repository.entities.Exam.ExamFile;
+import ir.periodicexaminations.model.repository.entities.Exam.VisionExam;
 import ir.periodicexaminations.model.repository.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.Date;
 
 @Component
 public class RepoTest implements CommandLineRunner {
 
     private final EmployeeRepository employeeRepository;
-    private final ExamRepository examRepository;
+    private final ExamFileRepository examFileRepository;
     private final UserRepository userRepository;
+    private final HearingExamRepository hearingExamRepository;
+    private final VisionExamRepository visionExamRepository;
+    private final BloodExamRepository bloodExamRepository;
 
-    @Autowired
-    public RepoTest(EmployeeRepository employeeRepository, ExamRepository examRepository, UserRepository userRepository) {
+
+    public RepoTest(EmployeeRepository employeeRepository, ExamFileRepository examFileRepository, UserRepository userRepository, HearingExamRepository hearingExamRepository, VisionExamRepository visionExamRepository, BloodExamRepository bloodExamRepository) {
         this.employeeRepository = employeeRepository;
-        this.examRepository = examRepository;
+        this.examFileRepository = examFileRepository;
         this.userRepository = userRepository;
+        this.hearingExamRepository = hearingExamRepository;
+        this.visionExamRepository = visionExamRepository;
+        this.bloodExamRepository = bloodExamRepository;
     }
 
 
     @Override
     public void run(String... args) throws Exception {
 
-
+/*
         Employee e1 = new Employee();
         e1.setEmpName("ali");
         e1.setEmpFamily("mirzaei");
@@ -47,7 +57,7 @@ public class RepoTest implements CommandLineRunner {
         e1.setUser(u);
         employeeRepository.save(e1);
 
-        System.out.println(e1.toString());
+        System.out.println(e1);
 
 
         Employee e2 = new Employee();
@@ -63,7 +73,7 @@ public class RepoTest implements CommandLineRunner {
         e2.setUser(u2);
         employeeRepository.save(e2);
 
-        System.out.println(e2.toString());
+        System.out.println(e2);
 
 
         Employee e3 = new Employee();
@@ -80,7 +90,7 @@ public class RepoTest implements CommandLineRunner {
         e3.setUser(u3);
         employeeRepository.save(e3);
 
-        System.out.println(e3.toString());
+        System.out.println(e3);
 
 
         Employee e4 = new Employee();
@@ -97,7 +107,7 @@ public class RepoTest implements CommandLineRunner {
         e4.setUser(u4);
         employeeRepository.save(e4);
 
-        System.out.println(e4.toString());
+        System.out.println(e4);
 
         Employee e5 = new Employee();
         e5.setEmpName("zahra");
@@ -113,7 +123,7 @@ public class RepoTest implements CommandLineRunner {
         e5.setUser(u5);
         employeeRepository.save(e5);
 
-        System.out.println(e5.toString());
+        System.out.println(e5);
 
 
         Employee e6 = new Employee();
@@ -130,10 +140,12 @@ public class RepoTest implements CommandLineRunner {
         e6.setUser(u6);
         employeeRepository.save(e6);
 
-        System.out.println(e6.toString());
+        System.out.println(e6);
 
 
-        Exam be1 = new Exam();
+        Exam be1 =(BloodExam) new ExamFactory().getKindOfExam(Exam.KindOfExam.BloodExam);
+
+
         be1.setCbc(50);
         be1.setWbc(120);
         be1.setHemoglobin(18);
@@ -193,10 +205,59 @@ public class RepoTest implements CommandLineRunner {
         e1.getExams().add(be6);
         employeeRepository.save(e1);
 
+
+        ExamFactory examFactory=new ExamFactory().getKindOfExam(Exam.KindOfExam.BloodExam).
         Exam be7 = new Exam(Exam.KindOfExam.HearingExam,new Timestamp(d.getTime()),8.0f,7.8f);
         examRepository.save(be7);
         e1.getExams().add(be7);
         employeeRepository.save(e1);
+
+*/
+        Employee e1 = new Employee();
+        e1.setEmpName("ali");
+        e1.setEmpFamily("mirzaei");
+        e1.setNationalCode("0078061210");
+
+        User u = new User();
+        u.setUserName(e1.getNationalCode());
+        u.setPassword("123456");
+        userRepository.save(u);
+
+        e1.setUser(u);
+        employeeRepository.save(e1);
+
+        System.out.println(e1);
+        ExamFile examFile = new ExamFile();
+        examFile.setYear(1402);
+        examFileRepository.save(examFile);
+
+        BloodExam be1 = new BloodExam();
+        be1.setCbc(50);
+        be1.setWbc(120);
+        be1.setHemoglobin(18);
+        Date d = new Date();
+        be1.setDateExamination( new Timestamp (d.getTime()));
+        bloodExamRepository.save(be1);
+        examFile.getBloodExams().add(be1);
+
+        VisionExam ve1 = new VisionExam();
+        ve1.setLeftVision(8.5f);
+        ve1.setRightVision(7.2f);
+        ve1.setDateExamination(new Timestamp (d.getTime()));
+        visionExamRepository.save(ve1);
+
+        examFile.getVisionExams().add(ve1);
+        examFileRepository.save(examFile);
+
+        e1.getExams().add(examFile);
+        employeeRepository.save(e1);
+
+        examFile.setEmployee(e1);
+        be1.setBExamFileId(examFile);
+        ve1.setVExamFileId(examFile);
+        examFileRepository.save(examFile);
+        bloodExamRepository.save(be1);
+        visionExamRepository.save(ve1);
 
 
     }

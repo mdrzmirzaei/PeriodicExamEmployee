@@ -1,5 +1,6 @@
 package ir.periodicexaminations.model.repository.entities;
 
+import ir.periodicexaminations.model.repository.entities.Exam.ExamFile;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,26 +17,18 @@ import java.util.Set;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "emp_id")
     private Long empId;
     private String empName;
     private String empFamily;
     private String nationalCode;
-
-
-    public Employee(String empName, String empFamily, String nationalCode) {
-        this.empName = empName;
-        this.empFamily = empFamily;
-        this.nationalCode = nationalCode;
-    }
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
 
     @OneToMany
-    @JoinColumn(name = "emp_id")
-    private Set<Exam> exams = new HashSet<>();
+    @JoinColumn(name = "employee")
+    private Set<ExamFile> exams = new HashSet<ir.periodicexaminations.model.repository.entities.Exam.ExamFile>();
 
 
     // todo: deal for cascade in JPA
