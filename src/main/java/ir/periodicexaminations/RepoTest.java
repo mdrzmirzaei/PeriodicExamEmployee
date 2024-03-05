@@ -1,11 +1,19 @@
 package ir.periodicexaminations;
 
-import ir.periodicexaminations.control.services.EmployeeService;
-import ir.periodicexaminations.model.impRepos.EmployeeRepository;
-import ir.periodicexaminations.model.impRepos.ExamRepository;
-import ir.periodicexaminations.model.impRepos.UserRepository;
+
+import ir.periodicexaminations.model.implementRepositories.EmployeeRepository;
+import ir.periodicexaminations.model.implementRepositories.ExamRepository;
+import ir.periodicexaminations.model.implementRepositories.UserRepository;
+import ir.periodicexaminations.model.repository.entities.Exam;
+import ir.periodicexaminations.model.repository.entities.Employee;
+import ir.periodicexaminations.model.repository.entities.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.sql.Timestamp;
+import java.util.Calendar;
+import java.util.Date;
 
 @Component
 public class RepoTest implements CommandLineRunner {
@@ -14,6 +22,7 @@ public class RepoTest implements CommandLineRunner {
     private final ExamRepository examRepository;
     private final UserRepository userRepository;
 
+    @Autowired
     public RepoTest(EmployeeRepository employeeRepository, ExamRepository examRepository, UserRepository userRepository) {
         this.employeeRepository = employeeRepository;
         this.examRepository = examRepository;
@@ -24,7 +33,7 @@ public class RepoTest implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        /*
+
         Employee e1 = new Employee();
         e1.setEmpName("ali");
         e1.setEmpFamily("mirzaei");
@@ -78,7 +87,7 @@ public class RepoTest implements CommandLineRunner {
         e4.setEmpName("mostafa");
         e4.setEmpFamily("safari");
         e4.setNationalCode("5897546231");
-      //  employeeRepository.save(e4);
+        //  employeeRepository.save(e4);
 
         User u4 = new User();
         u4.setUserName(e4.getNationalCode());
@@ -111,7 +120,7 @@ public class RepoTest implements CommandLineRunner {
         e6.setEmpName("fatemeh");
         e6.setEmpFamily("azarpeiqe");
         e6.setNationalCode("9865324578");
-  //      employeeRepository.save(e6);
+        //      employeeRepository.save(e6);
 
         User u6 = new User();
         u6.setUserName(e6.getNationalCode());
@@ -124,8 +133,70 @@ public class RepoTest implements CommandLineRunner {
         System.out.println(e6.toString());
 
 
-         */
+        Exam be1 = new Exam();
+        be1.setCbc(50);
+        be1.setWbc(120);
+        be1.setHemoglobin(18);
+        Date d = new Date();
+        be1.setDateExamination(new Timestamp(d.getTime()));
+        examRepository.save(be1);
+        e1.getExams().add(be1);
+        employeeRepository.save(e1);
 
+
+
+        Exam be2 = new Exam();
+        be2.setCbc(60);
+        be2.setWbc(130);
+        be2.setHemoglobin(12);
+        be2.setDateExamination(new Timestamp(d.getTime()));
+        examRepository.save(be2);
+        e2.getExams().add(be2);
+        employeeRepository.save(e2);
+
+        Exam be3 = new Exam();
+        be3.setCbc(40);
+        be3.setWbc(100);
+        be3.setHemoglobin(7);
+        be3.setDateExamination(new Timestamp(d.getTime()));
+        examRepository.save(be3);
+        e3.getExams().add(be3);
+        employeeRepository.save(e3);
+
+
+        Exam be4 = new Exam();
+        be4.setCbc(60);
+        be4.setWbc(105);
+        be4.setHemoglobin(14);
+        be4.setDateExamination(new Timestamp(d.getTime()));
+        examRepository.save(be4);
+        e4.getExams().add(be4);
+        employeeRepository.save(e4);
+
+        Exam be5 = new Exam();
+        be5.setCbc(30);
+        be5.setWbc(203);
+        be5.setHemoglobin(17);
+        be5.setDateExamination(new Timestamp(d.getTime()));
+        examRepository.save(be5);
+        e5.getExams().add(be5);
+        employeeRepository.save(e5);
+
+
+        Exam be6 = new Exam();
+        be6.setCbc(22);
+        be6.setWbc(216);
+        be6.setHemoglobin(15);
+        d= new Date(2024, Calendar.MARCH, 3);
+        be6.setDateExamination(new Timestamp(d.getTime()));
+        examRepository.save(be6);
+        e1.getExams().add(be6);
+        employeeRepository.save(e1);
+
+        Exam be7 = new Exam(Exam.KindOfExam.HearingExam,new Timestamp(d.getTime()),8.0f,7.8f);
+        examRepository.save(be7);
+        e1.getExams().add(be7);
+        employeeRepository.save(e1);
 
 
     }

@@ -1,47 +1,40 @@
 package ir.periodicexaminations.control.controllers;
 
-
-import ir.periodicexaminations.control.services.EmployeeService;
-import ir.periodicexaminations.model.EmployeeDao;
-import ir.periodicexaminations.model.impRepos.EmployeeRepository;
-import ir.periodicexaminations.model.repository.Employee;
+import ir.periodicexaminations.services.EmployeeService;
+import ir.periodicexaminations.model.repository.entitiesDTOs.EmployeeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.util.*;
-
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/employees")
 public class EmployeeController implements Serializable {
-
+    private EmployeeService employeeService;
 
     @Autowired
-    EmployeeService employeeService;
-
-    @PostMapping(value = "/list")
-    List<EmployeeDao> getEmployeeList() {
-        return employeeService.showEmployees();
+    public void setEmployeeService(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
+    Pageable pageable = null;
 
-    @PostMapping(value = "/all")
-    Page<Employee> allEmployees() {
-        return employeeService.findall_forME();
+    @PostMapping(value = "/lista")
+    List<EmployeeDto> getEmployeesList() {
+        return employeeService.showAllEmployees();
     }
 
-
-    @GetMapping(value = "/my")
-    Page<Employee> myEmp() {
-        return employeeService.findall_forME();
+    @GetMapping(value = "/listp")
+    @ResponseBody
+    List<EmployeeDto> getPageableEmployeeList(@RequestParam(defaultValue = "0", required = false) int pageNumber, @RequestParam(defaultValue = "3", required = false) int pageSize) {
+        if (pageSize > 50)
+            pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+        return employeeService.showPageableEmployees(pageable);
     }
 }

@@ -1,4 +1,4 @@
-package ir.periodicexaminations.model.repository;
+package ir.periodicexaminations.model.repository.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,11 +12,11 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="employees")
+@Table(name = "employees")
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="emp_id")
+    @Column(name = "emp_id")
     private Long empId;
     private String empName;
     private String empFamily;
