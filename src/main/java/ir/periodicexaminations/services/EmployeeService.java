@@ -1,45 +1,29 @@
 package ir.periodicexaminations.services;
 
-import ir.periodicexaminations.model.repository.entitiesDTOs.EmployeeDto;
+import ir.periodicexaminations.model.repository.entities.Employee;
 import ir.periodicexaminations.model.implementRepositories.EmployeeRepository;
-import ir.periodicexaminations.services.servicesImp.impEmployeeService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
-
 @Service
-public class EmployeeService implements impEmployeeService {
-
+@RequiredArgsConstructor
+public class EmployeeService {
     private final EmployeeRepository employeeRepository;
 
-    @Autowired
-    public EmployeeService(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public List<Employee> listEmployee() {
+        return employeeRepository.findAll();
     }
 
-    List<EmployeeDto> employeeList = new ArrayList<EmployeeDto>();
-
-
-    public List<EmployeeDto> showAllEmployees() {
-        employeeList.clear();
-        employeeRepository.findAll().forEach(employee -> employeeList.add(new EmployeeDto(employee)));
-        return employeeList;
+    public Page<Employee> listPageableEmployee(PageRequest pageRequest) {
+        return employeeRepository.findAll(pageRequest);
     }
 
 
-    @Override
-    public List<EmployeeDto> showPageableEmployees(Pageable pageable) {
-        employeeList.clear();
-        employeeRepository.findAll(pageable).forEach(employee -> employeeList.add(new EmployeeDto(employee)));
-        return employeeList;
-    }
-
-    @Override
-    public Long employeesCount() {
+    public Long countEmployee() {
         return employeeRepository.count();
     }
 }

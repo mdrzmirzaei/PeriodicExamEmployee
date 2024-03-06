@@ -1,6 +1,5 @@
 package ir.periodicexaminations.model.repository.entities;
 
-import ir.periodicexaminations.model.repository.entities.Exam.ExamFile;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,10 +24,6 @@ public class Employee {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
-
-    @OneToMany
-    @JoinColumn(name = "employee")
-    private Set<ExamFile> exams = new HashSet<ir.periodicexaminations.model.repository.entities.Exam.ExamFile>();
 
 
     // todo: deal for cascade in JPA

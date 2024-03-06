@@ -1,12 +1,9 @@
-package ir.periodicexaminations.model.repository.entities.Exam;
+package ir.periodicexaminations.model.repository.entities;
 
-import ir.periodicexaminations.model.repository.entities.Employee;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -19,14 +16,14 @@ public class BloodExam {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long bexamId;
     @Temporal(TemporalType.DATE)
-    private Date dateExamination;
-    private int cbc;
+    private java.util.Date dateExamination;
+    private int rbc;
     private int wbc;
     private int hemoglobin;
+    private float platelets;
+    private int fbs;
 
     @ManyToOne
-    @JoinColumn(name = "exam_file_id")
-    private ExamFile bExamFileId;
-
-
+    @JoinColumn(name="emp_id")
+    private Employee employee;
 }

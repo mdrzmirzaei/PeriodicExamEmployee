@@ -18,8 +18,4 @@ public class User {
     private Long userId;
     private String userName;
     private String password;
-
-    @OneToOne(mappedBy = "user")
-    private Employee employee;
-
 }
