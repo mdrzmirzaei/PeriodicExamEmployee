@@ -1,7 +1,5 @@
-package ir.periodicexaminations.model.repository.entitiesDTOs;
+package ir.periodicexaminations.model.entitiesDTO;
 
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 import java.util.Date;

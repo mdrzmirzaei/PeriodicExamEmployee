@@ -1,6 +1,6 @@
-package ir.periodicexaminations.model.repository.entitiesDTOs;
+package ir.periodicexaminations.model.entitiesDTO;
 
-import ir.periodicexaminations.model.repository.entities.User;
+import ir.periodicexaminations.model.entities.User;
 import lombok.Data;
 
 @Data

@@ -1,4 +1,4 @@
-package ir.periodicexaminations.model.repository.entities;
+package ir.periodicexaminations.model.entities;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

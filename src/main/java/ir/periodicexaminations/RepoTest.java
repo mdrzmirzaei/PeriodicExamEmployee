@@ -1,17 +1,11 @@
 package ir.periodicexaminations;
 
 
-import ir.periodicexaminations.model.implementRepositories.EmployeeRepository;
-import ir.periodicexaminations.model.implementRepositories.BloodExamRepository;
-import ir.periodicexaminations.model.implementRepositories.UserRepository;
-import ir.periodicexaminations.model.repository.entities.Employee;
-import ir.periodicexaminations.model.repository.entities.BloodExam;
-import ir.periodicexaminations.model.repository.entities.User;
+import ir.periodicexaminations.model.repository.EmployeeRepository;
+import ir.periodicexaminations.model.repository.BloodExamRepository;
+import ir.periodicexaminations.model.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
-import java.util.Date;
-import java.util.GregorianCalendar;
 
 @Component
 public class RepoTest implements CommandLineRunner {
@@ -199,9 +193,6 @@ public class RepoTest implements CommandLineRunner {
         be7.setDateExamination(new GregorianCalendar().getTime());
         be7.setEmployee(e1);
         bloodExamRepository.save(be7);
-
-
-
  */
 
     }

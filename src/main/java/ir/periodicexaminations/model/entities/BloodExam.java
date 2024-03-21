@@ -1,14 +1,13 @@
-package ir.periodicexaminations.model.repository.entities;
+package ir.periodicexaminations.model.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
-
-import java.sql.Timestamp;
-import java.util.Date;
+import lombok.NoArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "bloodExams")
 public class BloodExam {
@@ -24,6 +23,6 @@ public class BloodExam {
     private int fbs;
 
     @ManyToOne
-    @JoinColumn(name="emp_id")
+    @JoinColumn(name = "emp_id")
     private Employee employee;
 }

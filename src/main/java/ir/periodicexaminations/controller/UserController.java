@@ -1,17 +1,12 @@
-package ir.periodicexaminations.control;
+package ir.periodicexaminations.controller;
 
-import ir.periodicexaminations.model.repository.entities.User;
-import ir.periodicexaminations.model.repository.entitiesDTOs.EmployeeDto;
-import ir.periodicexaminations.model.repository.entitiesDTOs.UserDto;
-import ir.periodicexaminations.services.UserService;
+import ir.periodicexaminations.model.entities.User;
+import ir.periodicexaminations.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.Serializable;
 import java.util.List;
 
 @RestController

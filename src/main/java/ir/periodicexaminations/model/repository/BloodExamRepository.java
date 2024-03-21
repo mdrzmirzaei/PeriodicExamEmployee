@@ -1,6 +1,6 @@
-package ir.periodicexaminations.model.implementRepositories;
+package ir.periodicexaminations.model.repository;
 
-import ir.periodicexaminations.model.repository.entities.BloodExam;
+import ir.periodicexaminations.model.entities.BloodExam;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
