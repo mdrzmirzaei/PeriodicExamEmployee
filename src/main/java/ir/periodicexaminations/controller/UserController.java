@@ -2,6 +2,8 @@ package ir.periodicexaminations.controller;
 
 import ir.periodicexaminations.model.entities.User;
 import ir.periodicexaminations.service.UserService;
+import ir.periodicexaminations.utils.CustomPageRequestDto;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,20 +17,12 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    PageRequest pageRequest = null;
 
-    @PostMapping(value = "/list")
-    List<User> getUsersList() {
-        return userService.userList();
+    @GetMapping(value = "/list")
+    public Page<User> userPageableList(@Valid @RequestBody CustomPageRequestDto<User> userCustomPageRequestDto) throws Exception
+    {
+        return userService.userPageableList(userCustomPageRequestDto.getPageRequest(User.class));
     }
 
-    @GetMapping(value = "/listPageable")
-    @ResponseBody
-    Page<User> getUsersPageableList(@RequestParam(defaultValue = "0", required = false) int pageNumber, @RequestParam(defaultValue = "4", required = false) int pageSize) {
-        if (pageSize > 50)
-            pageSize = 10;
-        pageRequest = PageRequest.of(pageNumber, pageSize);
 
-        return userService.userPageableList(pageRequest);
-    }
 }

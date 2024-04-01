@@ -1,11 +1,17 @@
 package ir.periodicexaminations;
 
 
+import ir.periodicexaminations.model.entities.BloodExam;
+import ir.periodicexaminations.model.entities.Employee;
+import ir.periodicexaminations.model.entities.User;
 import ir.periodicexaminations.model.repository.EmployeeRepository;
 import ir.periodicexaminations.model.repository.BloodExamRepository;
 import ir.periodicexaminations.model.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 @Component
 public class RepoTest implements CommandLineRunner {
@@ -23,7 +29,8 @@ public class RepoTest implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-/*
+
+        /*
         Employee e1 = new Employee();
         e1.setEmpName("ali");
         e1.setEmpFamily("mirzaei");
@@ -193,7 +200,9 @@ public class RepoTest implements CommandLineRunner {
         be7.setDateExamination(new GregorianCalendar().getTime());
         be7.setEmployee(e1);
         bloodExamRepository.save(be7);
- */
 
+
+
+         */
     }
 }
