@@ -1,5 +1,4 @@
-package ir.periodicexaminations.service.util;
-
+package ir.periodicexaminations.utils;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.domain.Sort;
