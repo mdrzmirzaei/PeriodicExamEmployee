@@ -20,11 +20,10 @@ public class EmployeeService {
     }
 
     public Page<Employee> listPageableEmployee(PageRequest pageableDTO) {
-        return employeeRepository.findAll(PageRequest.of(pageableDTO.getPageNumber(), pageableDTO.getPageSize(),pageableDTO.getSort()));
+        return employeeRepository.findAll(PageRequest.of(pageableDTO.getPageNumber(), pageableDTO.getPageSize(), pageableDTO.getSort()));
     }
 
     public Optional<Employee> findEmployee(Long empId) {
         return employeeRepository.findById(empId);
     }
-
 }
